@@ -22,6 +22,7 @@ class Home(ListView):
     template_name = "home.html"
     cats = Category.objects.all()
     ordering = ['-post_date']
+    paginate_by = 4
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
