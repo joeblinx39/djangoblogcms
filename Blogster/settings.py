@@ -199,6 +199,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'language': 'eng_ENG'
 }
 
-TINYMCE_SPELLCHECKER = Trueimport
+TINYMCE_SPELLCHECKER = True
 import django_heroku
 django_heroku.settings(locals())
