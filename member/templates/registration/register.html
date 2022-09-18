@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Account
+{% endblock  %}
+
+
+{% block content %}
+  
+
+<div class="container w-75">
+    <h1>Register</h1>
+<br><br>
+<div class="form-group">
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn  btn-secondary btn-lg w-25 mb-lg-5">Register</button>
+        <br>  
+        <small class="text-muted">Already a member?, <a href="{% url 'login' %}">Please Signin</a></small>
+        <br><br>
+    </form>
+</div>
+</div>
+
+{% endblock %}

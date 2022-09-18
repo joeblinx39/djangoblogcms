@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Create New Blog Category{% endblock  %}
+{% block content %}
+  
+  <div class="container w-50 text-center m-auto" style="min-height: 62vh;">
+    {% if user.is_authenticated %}
+<h1>Add Category</h1>
+<br><br>
+<div class="form-group">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            
+            <input type="text" placeholder="Enter A New Category" name="name" maxlength="255" class="form-control" required id="id_name">
+        </div>
+        <button class="btn btn-lg btn-secondary">Add Category</button>
+    </form>
+</div>
+
+{% else %}
+
+<h1>You're not allowed here (and you know it....)</h1>
+
+{% endif %}
+  </div>
+{% endblock %}

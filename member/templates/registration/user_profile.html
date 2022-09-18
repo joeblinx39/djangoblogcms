@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container mb-lg-5">
+  <h1>User Profile...</h1>
+  <br><br><br>
+  <div class="card w-50 m-auto" style="background-color:cadetblue; border-color:darkblue; border-radius: 25px;">
+    <div class="card-img-top text-center">
+      {% if page_user.profile_pic %}
+      <img src="{{ page_user.profile_pic.url }}" alt="" style="height: 400px; margin-top: 4%; border-radius: 50%;" />
+      {% else %}
+      <img src="{% static 'blogify/images/profile_default.jpg' %}" alt="" style="height: 300px; margin-left: 14%; margin-top: 4%; border-radius: 50%;"
+         />
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title text-white">
+        {{ page_user.user.first_name }} {{ page_user.user.last_name }}
+      </h5>
+
+      <p class="card-text text-white">{{ page_user.bio|safe }}</p>
+
+
+        {% if page_user.website_url %}
+        <p class="small "><strong class="text-white">Website:</strong> <a href="{{ page_user.website_url }}" target="_blank" class="text-white ml-4">{{ page_user.website_url }}</a></p>
+        {% endif %}
+
+        {% if page_user.facebook_url %}
+        <p class="small "><strong class="text-white">Facebook: </strong><a href="{{ page_user.facebook_url }}" target="_blank" class="text-white ml-4">{{ page_user.facebook_url }}</a></p>
+        {% endif %}
+
+        {% if page_user.twitter_url %}
+        <p class="small "><strong class="text-white">Twitter:</strong><a href="{{ page_user.twitter_url }}" target="_blank" class="text-white ml-5">{{ page_user.twitter_url }}</a></p>
+        {% endif %}
+
+        {% if page_user.instagram_url %}
+        <p class="small "><strong class="text-white">Instagram:</strong><a href="{{ page_user.instagram_url }}" target="_blank" class="text-white ml-4">{{ page_user.instagram_url }}</a></p>
+        {% endif %}
+
+        {% if page_user.github_url %}
+        <p class="small "><strong class="text-white">Github:</strong><a href="{{ page_user.github_url }}" target="_blank" class="text-white ml-5">{{ page_user.github_url }}</a></p>
+        {% endif %}
+
+
+        {% if page_user.linkedin_url %}
+        <p class="small "><strong class="text-white">Linkedin:</strong><a href="{{ page_user.linkedin_url }}" target="_blank" class="text-white ml-lg-4 text-justify">{{ page_user.linkedin_url }}</a></p>
+        {% endif %}
+
+      </p>
+
+      
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block content %}
+<!-- Page content-->
+<div class="container" style="min-height: 90vh">
+  <div class="row">
+    {% if category_posts %}
+
+    <h1 class="mb-lg-3 mt-lg-3">{{ cats }}</h1>
+    
+    <!-- Blog entries-->
+    <div class="col-lg-10">
+      {% for post in category_posts %}
+      <!-- Featured blog post-->
+      <div class="card mb-4">
+        {% if post.header_image %}
+        <a href="{% url 'article-details' post.pk %}"
+          ><img
+            class="card-img-top"
+            src="{{ post.header_image.url }}"
+            alt="..."
+            style="height: 100%"
+        /></a>
+        {% endif %}
+        <div class="card-body">
+          <div class="small text-muted">{{ post.post_date }}</div>
+          <h2 class="card-title h4">{{ post.title }}</h2>
+          <h2 class="card-subtitle small">
+            Posted By {{ post.author.first_name }} {{ post.author.last_name }}
+          </h2>
+          <p class="card-text">{{ post.snippet|safe }}</p>
+          <div class="btn-group-horizontal">
+            <a
+              href="{% url 'article-details' post.pk %}"
+              type="button"
+              class="btn btn-primary"
+              >Read more →</a
+            >
+            {% if user.is_authenticated %} {% if user.id == post.author.id %}
+            <a
+              type="button"
+              class="btn btn-outline-secondary m-lg-2"
+              href="{% url 'update_post' post.pk %}"
+              >Edit</a
+            >
+            <a
+              href="{% url 'delete_post' post.pk %}"
+              type="button"
+              class="btn btn-outline-danger m-lg-2"
+              >Delete</a
+            >
+            {% endif %} {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+
+      <h2>Sorry This Page Does Not Exist.....</h2>
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

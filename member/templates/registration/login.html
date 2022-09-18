@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %} Access Account {% endblock %} 
+{% block content %}
+
+<div class="container w-75" style="height: 72vh">
+  <h1>Login...</h1>
+  <br /><br />
+  <div class="form-group">
+    <form method="post">
+      {% csrf_token %}
+      <!-- {{form.as_p}} -->
+      <div class="form-group">
+        <input
+          type="text"
+          name="username" 
+          autofocus 
+          autocapitalize="none" 
+          autocomplete="username" 
+          maxlength="150" 
+          required id="id_username"
+          class="form-control"
+          placeholder="username"
+          
+        />
+      </div>
+      <br>
+      <div class="form-group">
+        <input
+          type="password"
+          name="password" 
+          autocomplete="current-password" 
+          required id="id_password"
+          class="form-control"
+          placeholder="password"
+          
+        />
+      </div>
+      <br>
+      <button class="btn btn-secondary btn-lg w-25 mb-lg-5">Login</button>
+
+    <br>  
+    <small class="text-muted">New Here, <a href="{% url 'register' %}">Please Signup</a></small>
+    
+    </form>
+  </div>
+</div>
+{% endblock %}

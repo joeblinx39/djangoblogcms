@@ -1,0 +1,171 @@
+{% extends "base.html" %} {% load static %} 
+{% block title %}Edit Profile Page{% endblock %} 
+{% block content %}
+
+<div class="container">
+  {% if user.is_authenticated %} {% if user.id == profile.user.id %}
+  <h1>Edit Profile Page</h1>
+  <br /><br />
+  <div class="w-75 m-auto">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group text-center">
+        {% if profile.profile_pic %}
+        <img
+          src="{{ profile.profile_pic.url }}"
+          alt=""
+          class="img-fluid rounded-circle border"
+          style="width: 300px"
+        />
+        <br /><br />
+
+        <div class="form-group text-center">
+          <label
+            class="btn btn-sm btn-primary"
+            style="width: 200px; height: 30px"
+            >Change Photo...
+            <input
+              type="file"
+              name="profile_pic"
+              id="id_profile_pic"
+              accept="image/*"
+              class="custom-file-input"
+            />
+          </label>
+        </div>
+        <div class="form-group text-center">
+          <label
+            for=""
+            class="btn btn-sm btn-danger"
+            style="width: 200px; height: 30px"
+            >Delete..
+            <input
+              type="checkbox"
+              name="profile_pic-clear"
+              id="profile_pic-clear_id"
+            />
+          </label>
+        </div>
+        {% else %}
+        <img
+          src="{% static 'blogify/images/profile_default.jpg' %}"
+          alt=""
+          style="height: 300px"
+          class="img-fluid rounded-start"
+        />
+        <br />
+        <div class="form-group">
+          <label
+            class="custom-file btn btn-sm btn-primary"
+            style="width: 100px; height: 30px"
+            >Add Photo...
+            <input
+              type="file"
+              name="profile_pic"
+              id="id_profile_pic"
+              accept="image/*"
+              class="custom-file-input"
+            />
+          </label>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="id_bio">Bio:</label>
+        <textarea
+          name="bio"
+          class="form-control"
+          cols="40"
+          rows="10"
+          maxlength="255"
+          id="id_bio"
+        >
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="id_website_url">Website url:</label>
+        <input
+          type="text"
+          name="website_url"
+          value=" "
+          class="form-control"
+          maxlength="255"
+          id="id_website_url"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="id_facebook_url">Facebook url:</label>
+        <input
+          type="text"
+          name="facebook_url"
+          class="form-control"
+          value=" "
+          maxlength="255"
+          id="id_facebook_url"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="id_instagram_url">Instagram url:</label>
+        <input
+          type="text"
+          name="instagram_url"
+          value=" "
+          class="form-control"
+          maxlength="255"
+          id="id_instagram_url"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="id_twitter_url">Twitter url:</label>
+        <input
+          type="text"
+          name="twitter_url"
+          value=" "
+          class="form-control"
+          maxlength="255"
+          id="id_twitter_url"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="id_linkedin_url">Linkedin url:</label>
+        <input
+          type="text"
+          name="linkedin_url"
+          value=" "
+          class="form-control"
+          maxlength="255"
+          id="id_linkedin_url"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="id_github_url">Github url:</label>
+        <input
+          type="text"
+          name="github_url"
+          value=" "
+          class="form-control"
+          maxlength="255"
+          id="id_github_url"
+        />
+      </div>
+
+      <button class="btn btn-secondary">Update Profile Page</button>
+    </form>
+  </div>
+
+  {% else %}
+  <h1>You are not the correct User To Edit This Page...</h1>
+
+  {% endif %} {% else %}
+  <h1>You're not allowed here (and you know it....)</h1>
+  {% endif %}
+</div>
+<br /><br />
+{% endblock %}

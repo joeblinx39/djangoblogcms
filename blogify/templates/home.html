@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block content %}
+<header class="py-5 border-bottom mb-4" style="background-color: lightcyan;">
+  <div class="container">
+      <div class="text-center my-5">
+          <h1 class="fw-bolder">Welcome to Blogify!</h1>
+          <p class="lead mb-0">The Home Of Exciting Stories, News And Updates...</p>
+      </div>
+  </div>
+</header>
+<!-- Page content-->
+<div class="container">
+  <div class="row">
+      <!-- Blog entries-->
+      <div class="col-lg-8">
+        {% for post in object_list %}
+          <!-- Featured blog post-->
+          <div class="card mb-4">
+            {% if post.header_image %}
+              <a href="{% url 'article-details' post.pk %}"><img class="card-img-top" src="{{ post.header_image.url }}" alt="..." style="height: 500px; object-fit: fill; "/></a>
+            {% endif %}
+              <div class="card-body">
+                <div class="small text-muted">{{ post.post_date }}</div>
+                <h2 class="card-title h4">{{ post.title }}</h2>
+                <h2 class="card-subtitle small">Posted By {{ post.author.first_name }} {{ post.author.last_name }}</h2>
+                <a class="badge text-bg-info text-decoration-none link-light"
+            href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
+                <p class="card-text">{{ post.snippet|safe }}</p>
+                <div class="btn-group-horizontal">
+                  <a href="{% url 'article-details' post.pk %}" type="button" class="btn btn-primary">Read more →</a>
+                  {% if user.is_authenticated %} {% if user.id == post.author.id %}
+                  <a type="button" class="btn btn-outline-secondary m-lg-2" href="{% url 'update_post' post.pk %}">Edit</a>
+                  <a href="{% url 'delete_post' post.pk %}" type="button" class="btn btn-outline-danger m-lg-2">Delete</a>
+                  {% endif %} {% endif %}
+                </div>
+                
+              </div>
+          </div>
+          {% endfor %}
+          
+          
+    
+          
+          
+          
+      </div>
+      <!-- Side widgets-->
+      <div class="col-lg-4">
+          <!-- Search widget-->
+          <div class="card mb-4">
+              <div class="card-header">Search</div>
+              <div class="card-body">
+                  <div class="input-group">
+                      <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                      <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                  </div>
+              </div>
+          </div>
+          <!-- Categories widget-->
+          <div class="card mb-4">
+              <div class="card-header">Categories</div>
+              {% if cat_menu %}
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <ul class="list-unstyled mb-0">
+                            {% for item in cat_menu %}
+                           <li>
+                            <a class="dropdown-item" href="{% url 'category' item|slugify %}">
+                              {{ item }}  </a>
+                           </li> 
+                           
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+          </div>
+          <!-- Side widget-->
+          <div class="card mb-4">
+              <div class="card-header">Side Widget</div>
+              <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
